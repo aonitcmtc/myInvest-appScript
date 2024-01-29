@@ -22,17 +22,20 @@ $(document).ready(function () {
     const scriptURL = $('#myForm').attr('action');
     const form = document.forms['myForm']
     form.addEventListener('submit', e => {
-        e.preventDefault()
-        fetch(scriptURL, { 
-          method: 'POST',
-          mode: 'no-cors',
-          body: new URLSearchParams(new FormData(form)),
-          headers: {
-              'Content-Type': 'application/json'
-          }
+      e.preventDefault()
+      fetch(scriptURL, { 
+        method: 'POST',
+        mode: 'no-cors',
+        body: new URLSearchParams(new FormData(form)),
+        headers: {
+            'Content-Type': 'application/json'
+        }
         })
-          .then(response => alert("บันทึกข้อมูลเรียบร้อยแล้ว.."))
-          .catch(error => console.error('Error!', error.message))
+        .then(response => {
+          alert("บันทึกข้อมูลเรียบร้อยแล้ว..")
+          location.reload();
+        })
+        .catch(error => console.error('Error!', error.message))
     })
     // Update Sheet
   });
