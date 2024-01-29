@@ -1,31 +1,54 @@
-var local_name = '362049dad35d9cef427de57d206b8071'; //MyInvest
-// mynavbar
-var myNav = $("#mynavbar");
+// My_invest
+// Example initialization
+// var myModal = new bootstrap.Modal(document.getElementById('myModal'));
 
-var nav_code = `<nav class="navbar navbar-expand-lg navbar-light">
-                    <div class="col-12">
-                    <div class="dropdown navbar-toggler" style="color: transparent; border-color: transparent;">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-bar-chart-o"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">หุ้น</a></li>
-                        <li><a class="dropdown-item" href="#">กองทุนรวม</a></li>
-                        <li><a class="dropdown-item" href="#">ทอง</a></li>
-                        <li><a class="dropdown-item" href="#">Forex</a></li>
-                        <li><a class="dropdown-item" href="#">Crypto Currency</a></li>
-                        </ul>
-                    </div>
-                    <div class="btn-group hidden-md-down p-0 px-3 m-0" role="group" aria-label="invest_group">
-                        <button type="button" class="btn btn-secondary disabled">
-                        <i class="fa fa-bar-chart-o"></i>
-                        </button>
-                        <button type="button" class="btn btn-secondary">หุ้น</button>
-                        <button type="button" class="btn btn-secondary">กองทุนรวม</button>
-                        <button type="button" class="btn btn-secondary">ทอง</button>
-                        <button type="button" class="btn btn-secondary">Forex</button>
-                        <button type="button" class="btn btn-secondary">Crypto Currency</button>
-                    </div>
-                    </div>
-                </nav>`
-myNav.append(nav_code);
+$(document).ready(function () {
+  $("#add_invest").click(function(){
+    is_type = $('.stock-btn.active').data('type');
+    // alert(is_type);
+    // is_type
+    $('#myModal').show()
+    $('#is_type').val(is_type)
+    $('.modal-title').text(is_type)
+  });
+
+  $(".btn-close").click(function(){
+    $('#myModal').hide()
+  });
+
+  // $("#update_data").click(function(){
+  //   let form = $("#myForm");
+  //   let url = form.attr('action');
+  //   let formData = form.serialize();
+  //   $.ajax({
+  //       type: "POST",
+  //       url: url,
+  //       data: JSON.stringify(formData),
+  //       success: function(data) {
+  //         alert("Form Submited Successfully");
+  //       },
+  //       error: function(data) {
+  //         alert("some Error");
+  //       }
+  //   });
+    // submitForm();
+  // });
+
+  $("#update_data").click(function (event) {
+    event.preventDefault();
+
+    var formData = $("#myForm").serialize();
+    var url = $("#myForm").attr('action');
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: formData,
+      dataType: "json",
+      encode: true,
+    }).done(function (data) {
+      console.log(data);
+    });
+    
+  });
+  
+});
