@@ -20,6 +20,14 @@
     <link href="css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="css/colors/default.css" id="theme" rel="stylesheet">
+
+    <!-- All Jquery -->
+    <script src="../assets/node_modules/jquery/jquery.min.js"></script>
+    <!-- datepicker-thai -->
+    <link href="../assets/bootstrap-datepicker-thai/css/datepicker.css" rel="stylesheet">
+    <script type="text/javascript" src="../assets/bootstrap-datepicker-thai/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="../assets/bootstrap-datepicker-thai/js/bootstrap-datepicker-thai.js"></script>
+    <script type="text/javascript" src="../assets/bootstrap-datepicker-thai/js/locales/bootstrap-datepicker.th.js"></script>
   </head>
 
   <body class="fix-header card-no-border fix-sidebar">
@@ -251,6 +259,10 @@
                 <label for="date" class="form-label">วันที่บันทึก</label>
                 <input type="text" class="form-control" name="date" id="date" aria-describedby="dateHelp">
                 <div id="dateHelp" class="form-text text-danger">*เลือกวันที่ดำเนินการก่อนกรอกข้อมูล.</div>
+              
+                <label for="birthdath" class="text-primary">ตัวอย่าง:: วันเกิด</label>
+                <input type="text" id="birthdath" name="birthdath" autocomplete="off" class="datepicker form-control" required>
+              
               </div>
 
               <div class="mb-3">
@@ -305,8 +317,7 @@
     </div>
     <!-- The Modal -->
 
-    <!-- All Jquery -->
-    <script src="../assets/node_modules/jquery/jquery.min.js"></script>
+    
     <!-- Bootstrap tether Core JavaScript -->
     <!-- <script src="../assets/node_modules/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <!-- slimscrollbar scrollbar JavaScript -->
@@ -328,5 +339,14 @@
 
     <!-- My-APP -->
     <script src="js/script/my_invest.js"></script>
+
+    <!-- datepicker -->
+    <script>
+      $(".datepicker").datepicker({
+        language:'th-th',
+        format:'dd/mm/yyyy',
+        autoclose: true
+      });
+    </script>
   </body>
 </html>
