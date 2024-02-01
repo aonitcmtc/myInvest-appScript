@@ -2,6 +2,8 @@ var local_name = '362049dad35d9cef427de57d206b8071'; //MyInvest
 // mynavbar
 var myNav = $("#my_topbar_nav");
 
+var addCSS = "width: 50px;"; // Example CSS rule
+
 var nav_code = `<nav class="navbar top-navbar navbar-expand-md navbar-light">
                   <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
@@ -16,8 +18,8 @@ var nav_code = `<nav class="navbar top-navbar navbar-expand-md navbar-light">
                     </a>
                   </div>
                   <div class="navbar-collapse">
-                    <ul class="navbar-nav me-auto">
-                      <li class="nav-item"> 
+                    <ul id="add-css" class="navbar-nav me-auto">
+                      <li class="nav-item m-auto"> 
                         <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark"
                               href="javascript:void(0)"><i class="fa fa-bars"></i></a> 
                       </li>
@@ -44,3 +46,4 @@ var nav_code = `<nav class="navbar top-navbar navbar-expand-md navbar-light">
                   </div>
                 </nav>`
 myNav.append(nav_code);
+myNav.find('#add-css').attr('style', addCSS);
