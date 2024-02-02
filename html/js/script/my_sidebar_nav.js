@@ -31,6 +31,9 @@ var nav_code = `<nav class="sidebar-nav">
                     <li> <a class="waves-effect waves-dark" href="my_template.html" aria-expanded="false"><i
                                 class="fa fa-bookmark text-danger"></i><span class="hide-menu">My template</span></a>
                     </li>
+                    <li> <a class="waves-effect waves-dark" href="../../myInvest-appScript/dev_example/index.html" aria-expanded="false"><i
+                                class="fa fa fa-terminal text-primary"></i><span class="hide-menu">Page Example</span></a>
+                    </li>
                   </ul>
                   <div class="text-center mt-4">
                     <a href="#"
