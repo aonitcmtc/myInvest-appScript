@@ -1076,67 +1076,63 @@
       <!-- ============================================================== -->
 
       <!-- The Modal -->
-      <div class="modal" id="myModal">
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title text-capitalize"><strong>เพิ่ม</strong> <span id="title_modal">Stock</span></h4>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-              <form id="myForm" name="myForm" 
+      <!-- sample modal content -->
+      <div id="myModal"
+      class="modal long-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="longmodal"
+      aria-hidden="true"
+      style="display: none"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-capitalize"><strong>เพิ่ม</strong> <span id="title_modal">Stock</span></h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              ×
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- <h4>Form</h4> -->
+            <form id="myForm" name="myForm" 
                   action="https://script.google.com/macros/s/AKfycbzne_FUWX5gFpShyzxyHm_gD2CwgWNzB2qci9uMiP-VHYpFzkysV9LQoQDv0I6gJwgifQ/exec" method="post">
                 <!-- Include input fields for Date, Symbol, Buy, Sell, Unit, Price/Unit, Broker, Remark -->
                 <input type="hidden" id="is_type" name="type" value="stock">
-
-                <!-- <div class="btn-group col-12" role="group" aria-label="Basic radio toggle button group">
-                  <input type="radio" class="btn-check d-none" name="btnradio" id="buy" autocomplete="off" checked>
-                  <label class="btn btn-outline-success form-control" for="buy">BUY</label>
                 
-                  <input type="radio" class="btn-check d-none" name="btnradio" id="sell" autocomplete="off">
-                  <label class="btn btn-outline-danger form-control" for="sell">SELL</label>
-                </div> -->
-                
-                <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-success">BUY</button>
-                  <button type="button" class="btn btn-outline-danger">SELL</button>
+                <div class="btn-group col-12" role="group" aria-label="Basic example">
+                  <button type="button" id="buy_order" class="btn btn-outline-success">BUY</button>
+                  <button type="button" id="sell_order" class="btn btn-outline-danger">SELL</button>
                 </div>
 
-                <div class="example">
-                  <h5 class="box-title mt-4">Default Datedpicker</h5>
-                  <p class="text-muted mb-3">
-                    just add class <code>.mydatepicker</code> to create
-                    it.
-                  </p>
+                <div class="mt-3">
+                  <label for="date" class="form-label">วันที่บันทึก</label>
                   <div class="input-group">
-                    <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                    <input type="text" class="form-control mydatepicker" name="date" placeholder="mm/dd/yyyy" readonly>
                     <div class="input-group-append">
                       <span class="input-group-text"><i class="ti-calendar"></i></span>
                     </div>
                   </div>
-                </div>
-
-                <div class="mb-3">
-                  <label for="date" class="text-primary">วันที่บันทึก</label>
-                  <input type="text" name="date" autocomplete="off" class="datepicker form-control" readonly>
                   <div id="dateHelp" class="form-text text-danger">*เลือกวันที่ดำเนินการก่อนกรอกข้อมูล.</div>
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3 mt-3">
                   <label for="symbol" class="form-label">ชื่อ stock</label>
                   <input type="text" class="form-control" name="symbol" id="symbol">
                 </div>
 
-                <div class="mb-3">
+                <div id="buy_form" class="mb-3">
                   <label for="buy" class="form-label">ซื้อ</label>
                   <input type="number" class="form-control" name="buy" id="buy">
                 </div>
 
-                <div class="mb-3">
+                <div id="sell_form" class="mb-3">
                   <label for="sell" class="form-label">ขาย</label>
                   <input type="number" class="form-control" name="sell" id="sell">
                 </div>
@@ -1166,17 +1162,16 @@
                   <button id="update_data" type="submit" class="btn btn-primary">Submit</button>
                 </div>
               </form>
-            </div>
-
-            <!-- Modal footer -->
-            <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div> -->
-
           </div>
         </div>
+        <!-- /.modal-content -->
       </div>
-      <!-- The Modal -->
+      <!-- /.modal-dialog -->
+    </div>
+
+
+    <!-- The Modal -->
+
 
     </div>
     <!-- ============================================================== -->
@@ -1200,77 +1195,6 @@
     <script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
-    <!-- This is data table -->
-    <script src="../assets/node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/node_modules/datatables.net-bs4/js/dataTables.responsive.min.js"></script>
-    <!-- start - This is for export functionality only -->
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    <!-- end - This is for export functionality only -->
-    <script>
-      $(function () {
-        $("#myTable").DataTable();
-        $(document).ready(function () {
-          var table = $("#example").DataTable({
-            columnDefs: [
-              {
-                visible: false,
-                targets: 2,
-              },
-            ],
-            order: [[2, "asc"]],
-            displayLength: 25,
-            drawCallback: function (settings) {
-              var api = this.api();
-              var rows = api
-                .rows({
-                  page: "current",
-                })
-                .nodes();
-              var last = null;
-              api
-                .column(2, {
-                  page: "current",
-                })
-                .data()
-                .each(function (group, i) {
-                  if (last !== group) {
-                    $(rows)
-                      .eq(i)
-                      .before(
-                        '<tr class="group"><td colspan="5">' +
-                          group +
-                          "</td></tr>"
-                      );
-                    last = group;
-                  }
-                });
-            },
-          });
-          // Order by the grouping
-          $("#example tbody").on("click", "tr.group", function () {
-            var currentOrder = table.order()[0];
-            if (currentOrder[0] === 2 && currentOrder[1] === "asc") {
-              table.order([2, "desc"]).draw();
-            } else {
-              table.order([2, "asc"]).draw();
-            }
-          });
-        });
-      });
-      $("#example23").DataTable({
-        dom: "Bfrtip",
-        buttons: ["copy", "csv", "excel", "pdf", "print"],
-      });
-      $(
-        ".buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel"
-      ).addClass("btn btn-primary mr-1");
-    </script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->

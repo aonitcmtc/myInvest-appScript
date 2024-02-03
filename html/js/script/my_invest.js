@@ -5,9 +5,10 @@
 $(document).ready(function () {
   $("#add_invest").click(function(){
     is_type = $('.stock-btn.active').data('type');
-    $('#myModal').show()
+    $('#myModal').modal('show');
     $('#is_type').val(is_type)
     $('#title_modal').text(is_type)
+    $('#buy_order').trigger("click");
   });
 
   $(".btn-close").click(function(){
@@ -17,6 +18,17 @@ $(document).ready(function () {
   $('.stock-btn').on('click', function() {
     name_label = $(this).data('type');
     $('#card_title_sheet').text(name_label);
+  });
+
+  
+  $("#buy_order").click(function(){
+    $('#sell_form').hide();
+    $('#buy_form').show();
+  });
+
+  $("#sell_order").click(function(){
+    $('#buy_form').hide();
+    $('#sell_form').show();
   });
 
   $("#update_data").click(function(){
