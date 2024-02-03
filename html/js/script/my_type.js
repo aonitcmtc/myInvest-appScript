@@ -6,7 +6,7 @@ var nav_code = `<nav class="navbar navbar-expand-lg navbar-light">
                   <div class="col-12">
                     <div class="dropdown navbar-toggler" style="color: transparent; border-color: transparent;">
                       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-bar-chart-o"></i>
+                          <i class="icon-Bar-Chart"></i>
                       </a>
                       <button type="button" class="btn btn-light text-primary text-capitalize">
                         <strong id="title_name_label">stock</strong>
@@ -22,7 +22,7 @@ var nav_code = `<nav class="navbar navbar-expand-lg navbar-light">
                     </div>
                     <div class="btn-group hidden-md-down p-0 px-3 m-0" role="group" aria-label="invest_group">
                       <button type="button" class="btn btn-secondary disabled">
-                        <i class="fa fa-bar-chart-o"></i>
+                        <i class="icon-Bar-Chart"></i>
                       </button>
                       <button type="button" data-type="stock" id="stock" class="btn btn-secondary stock-btn">หุ้น</button>
                       <button type="button" data-type="fund" id="fund" class="btn btn-secondary stock-btn">กองทุนรวม</button>

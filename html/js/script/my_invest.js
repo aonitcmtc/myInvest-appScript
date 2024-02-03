@@ -5,11 +5,8 @@
 $(document).ready(function () {
   $("#add_invest").click(function(){
     is_type = $('.stock-btn.active').data('type');
-    // alert(is_type);
-    // is_type
     $('#myModal').show()
     $('#is_type').val(is_type)
-    // alert(is_type)
     $('#title_modal').text(is_type)
   });
 
@@ -57,17 +54,22 @@ $(document).ready(function () {
       .then(response => response.json())
       .then(data => {
         // console.log(data);
-        // console.log(data.sheetAllData);
         var sheetAllData = JSON.parse(data.sheetAllData)
-        // console.log(sheetAllData);
-        crate_data_table(sheetAllData);
+        // console.log(sheetAllData !== null && Object.keys(sheetAllData).length !== 0);
+        if (sheetAllData !== null && Object.keys(sheetAllData).length !== 0) {
+          create_data_table(sheetAllData);
+        } else {
+          $('#all_invest_loading').hide();
+          $('#all_invest_no_content').show();
+          console.log("Object is either null or empty");
+        }
       })
       .catch(error => {
         console.error('Error!', error.message);
       });
   }
 
-  function crate_data_table(data) {
+  function create_data_table(data) {
     console.log('Show Data >>>');
     all_data = []
 
@@ -115,6 +117,12 @@ $(document).ready(function () {
     // console.log('Show Table >>>');
     tableBody.append(tbody); // render Table
     // console.log(tbody)
+
+    // setTimeout(function() {
+      // $("#all_invest").DataTable({
+      //   responsive: true,
+      // });
+    // }, 300);
   }
 
   function getData(url_controller) {
