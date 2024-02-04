@@ -3,18 +3,26 @@
 // var myModal = new bootstrap.Modal(document.getElementById('myModal'));
 
 $(document).ready(function () {
+
   $("#add_invest").click(function(){
-    is_type = $('.stock-btn.active').data('type');
+    var is_type = $('.stock-btn.active').data('type');
+    // Update other modal content and properties
+    $('#title_modal').text(is_type);
+    $('#is_type').val(is_type);
+
     $('#myModal').modal('show');
-    $('#is_type').val(is_type)
-    $('#title_modal').text(is_type)
-    $('#buy_order').trigger("click");
+    // render Modal
+    setTimeout(function() {
+      // Code to be executed after 500 milliseconds
+      $("#buy_order").addClass('active');
+      // $("#buy_order").click();
+    }, 100);
   });
 
   $(".btn-close").click(function(){
     $('#myModal').hide()
   });
-
+ 
   $('.stock-btn').on('click', function() {
     name_label = $(this).data('type');
     $('#card_title_sheet').text(name_label);
@@ -29,25 +37,111 @@ $(document).ready(function () {
   $("#sell_order").click(function(){
     $('#buy_form').hide();
     $('#sell_form').show();
+    $("#buy_order").removeClass('active');
   });
 
+  function calc_amount_price(price, unit_buy, unit_sell) {
+    if (price > 0 && (unit_buy > 0 || unit_sell > 0)) {
+      if ($('#sell_form').is(':visible')) {
+        amount = price * unit_sell
+        $('#unit').val(amount);
+      }
+
+      if ($('#buy_form').is(':visible')) {
+        amount = price * unit_buy
+        $('#unit').val(amount);
+      }
+    }
+  }
+
+  $("#price").change(function(){
+    price = $(this).val();
+    unit_buy = $('#unit_buy').val();
+    unit_sell = $('#unit_sell').val();
+    calc_amount_price(price, unit_buy, unit_sell)
+  });
+
+  $("#unit_buy").change(function(){
+    price = $('#price').val();
+    unit_buy = $(this).val();
+    unit_sell = 0;
+    $('#buy').val(unit_buy);
+    calc_amount_price(price, unit_buy, unit_sell)
+  });
+
+  $("#unit_sell").change(function(){
+    price = $('#price').val();
+    unit_buy = 0;
+    unit_sell = $(this).val();
+    $('#sell').val(unit_sell);
+    calc_amount_price(price, unit_buy, unit_sell)
+  });
+
+  $("input[name=date]").change(function(){
+    $('.invalid-js-custom').hide(); // valid
+  });
+
+  update_status = true;
   $("#update_data").click(function(){
+    //One Click Update
+    if (update_status) {
+      update_status = false
+    }else{
+      return false;
+    }
     // Update Sheet
     const scriptURL = $('#myForm').attr('action');
     const form = document.forms['myForm']
     form.addEventListener('submit', e => {
       e.preventDefault()
+
+      // valid_form
+      if ($('input[name=date]').val() == '' || $('input[name=date]').val() == undefined) {
+        $('.invalid-js-custom').show();
+        return false
+      }
+
+      if ($('input[name=symbol]').val() == '' || $('input[name=symbol]').val() == undefined) {
+        return false
+      }
+
+      if ($('input[name=price]').val() == '' || $('input[name=price]').val() == undefined) {
+        return false
+      }
+
+      if (!$('input[name=unit_buy]:hidden').length > 0 && ($('input[name=unit_buy]').val() == '' || $('input[name=unit_buy]').val() == undefined)) {
+        return false
+      }
+
+      if (!$('input[name=unit_sell]:hidden').length > 0 && ($('input[name=unit_sell]').val() == '' || $('input[name=unit_sell]').val() == undefined)) {
+        return false
+      }
+
+      if ($('input[name=unit]').val() == '' || $('input[name=unit]').val() == undefined) {
+        return false
+      }
+      // valid_form
+      $('#update_data').addClass('disabled');
+      $('.submit-form-spin').show();
+
       fetch(scriptURL, { 
         method: 'POST',
         mode: 'no-cors',
         body: new URLSearchParams(new FormData(form)),
       })
       .then(response => {
-        alert("บันทึกข้อมูลเรียบร้อยแล้ว..")
+        // alert("บันทึกข้อมูลเรียบร้อยแล้ว..")
+        Swal.fire({
+          title: "Successfully!",
+          showConfirmButton: false,
+          type: "success",  // Correct the parameter name here
+          timer: 1500
+        });
         location.reload();
       })
       .catch(error => console.error('Error!', error.message))
     })
+    $('.submit-form-spin').hide();
     // Update Sheet
   });
 
@@ -103,7 +197,7 @@ $(document).ready(function () {
         // const birthdate = get_birthdate.toLocaleDateString('th-TH', options);
 
         tr_color = 'table-success';
-        if (i == 1){
+        if (all_data[i][4] > 0){
           tr_color = 'table-danger';
         }
 
