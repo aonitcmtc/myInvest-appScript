@@ -137,7 +137,9 @@ $(document).ready(function () {
           type: "success",  // Correct the parameter name here
           timer: 1500
         });
-        location.reload();
+        setTimeout(function() {
+          location.reload();
+        }, 1500);
       })
       .catch(error => console.error('Error!', error.message))
     })
