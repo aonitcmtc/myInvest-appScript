@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Index</title>
+    <title>login</title>
+    <base target="_top">
     <link rel="stylesheet" href="pack/css/bootstrap.min.css">
     <link rel="stylesheet" href="pack/css/plugins/owl.carousel.min.css">
     <link rel="stylesheet" href="pack/font/flaticon.css">
@@ -81,17 +82,21 @@
                   <div class="mb-5">
                     <h4> Log in</h4>
                   </div>
-                  <form action="html/index.html">
-                    <!-- Email input -->
+                  <!-- action="html/index.html" -->
+                  <form id="FormLogin" name="FormLogin" method="get"
+                      action="https://script.google.com/macros/s/AKfycbxNdonkJNlGZanEy173pbFti9IPewABdauNJJrsZVLtjuGbU2PQ2UwshyFQqKQhKeo-/exec">
+                    
+                    <input type="hidden" id="ctrl" name="ctrl" value="checkLogin" class="form-control" />
+                    <!-- Username input -->
                     <div class="form-outline mb-4">
-                      <input type="email" id="form3Example3" class="form-control" />
-                      <label class="form-label" for="form3Example3">Email address</label>
+                      <input type="text" id="username" name="username" class="form-control" />
+                      <label class="form-label" for="username">Email address</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline mb-4">
-                      <input type="password" id="form3Example4" class="form-control" />
-                      <label class="form-label" for="form3Example4">Password</label>
+                      <input type="password" id="password" name="password" class="form-control" />
+                      <label class="form-label" for="password">Password</label>
                     </div>
 
                     <!-- Checkbox -->
@@ -103,7 +108,7 @@
                     </div>
 
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-block mb-4">
+                    <button id="update_data" type="submit" class="btn btn-primary btn-block mb-4">
                       Sign up
                     </button>
 
@@ -136,5 +141,10 @@
       <!-- Section: Design Block -->
     </div>
 
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../myInvest-appScript/assets/node_modules/jquery/jquery.min.js"></script>
+    <!-- My-APP -->
+    <script src="login.js"></script>
   </body>
 </html>
