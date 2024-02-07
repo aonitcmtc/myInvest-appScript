@@ -157,3 +157,16 @@ var nav_code = css + `<nav class="sidebar-nav">
                   </ul>
                 </nav>`;
 myNav.append(nav_code);
+
+//Check User Login
+$(document).ready(function() {
+  const retrievedUser = JSON.parse(localStorage.getItem('user'));
+  console.log('retrievedUser');
+  if (retrievedUser) {
+      console.log(retrievedUser.class);
+      console.log(retrievedUser.user);
+  }else{
+      localStorage.clear();
+      window.location.href = "../index.html";
+  }
+});

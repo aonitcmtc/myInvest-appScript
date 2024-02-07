@@ -83,8 +83,8 @@
                     <h4> Log in</h4>
                   </div>
                   <!-- action="html/index.html" -->
-                  <form id="FormLogin" name="FormLogin" method="get"
-                      action="https://script.google.com/macros/s/AKfycbxNdonkJNlGZanEy173pbFti9IPewABdauNJJrsZVLtjuGbU2PQ2UwshyFQqKQhKeo-/exec">
+                  <form id="loginForm" name="loginForm"
+                      action="https://script.google.com/macros/s/AKfycbyzSBLAsk4BE5YXCnmn3yDadGSyDt878OR7JUVwonoK-qO243ahgC1M8NUCeoY7u9tv/exec">
                     
                     <input type="hidden" id="ctrl" name="ctrl" value="checkLogin" class="form-control" />
                     <!-- Username input -->
@@ -108,7 +108,8 @@
                     </div>
 
                     <!-- Submit button -->
-                    <button id="update_data" type="submit" class="btn btn-primary btn-block mb-4">
+                    <button id="login_submit" type="submit" class="btn btn-primary btn-block mb-4">
+                      <i class="fa fa-spinner fa-spin submit-form-spin" style="display: none;"></i>
                       Sign up
                     </button>
 
@@ -144,7 +145,104 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="../myInvest-appScript/assets/node_modules/jquery/jquery.min.js"></script>
-    <!-- My-APP -->
-    <script src="login.js"></script>
+    <!-- Sweet-Alert  -->
+    <script src="../myInvest-appScript/assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="../myInvest-appScript/assets/node_modules/sweetalert2/sweet-alert.init.js"></script>
+
+    <script>
+      
+      function alert_error(txt = '') {
+        title = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
+        if(txt != '') {
+          title = 'กรุณากรอกข้อมูล!';
+        }
+
+        txt = `<span class="text-danger">${txt}</span>`
+        Swal.fire({
+          type: "error",
+          title: title,
+          html: txt + "โปรดลองอีกครั้ง!",
+          // footer: '<a href="#">Why do I have this issue?</a>'
+          showConfirmButton: false,
+        });
+      }
+
+      update_status = true;
+      $("#login_submit").click(function(){
+        //One Click Update
+        if (update_status) {
+          update_status = false
+        }else{
+          return false;
+        }
+
+        // Update Sheet
+        const scriptURL = $('#loginForm').attr('action');
+        const form = document.forms['loginForm']
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+
+          // valid_form
+          if ($('input[name=username]').val() == '' || $('input[name=username]').val() == undefined) {
+            alert_error('ชื่อผู้ใช้ไม่ถูกต้อง');
+            update_status = true;
+            return false
+          }
+
+          if ($('input[name=password]').val() == '' || $('input[name=password]').val() == undefined) {
+            alert_error('รหัสผ่านไม่ถูกต้อง');
+            update_status = true;
+            return false
+          }
+          // valid_form
+          $('#login_submit').addClass('disabled');
+          $('.submit-form-spin').show();
+
+          var scriptURL = $('#loginForm').attr('action');
+          var username = $('#username').val();
+          var password = $('#password').val();
+
+          // var username = 'admin';
+          // var password = '1234';
+          var url_searchName = scriptURL+"?ctrl=" + encodeURIComponent('checkLogin') + '&username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
+          
+          // Ajax Login
+          fetch(url_searchName)
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              user_data = JSON.parse(data.user);
+              console.log(user_data);
+              arr_user = user_data[0].split(',')
+              console.log(arr_user);
+              const user = {
+                user: arr_user[1],
+                fullname: arr_user[3]+' '+arr_user[4],
+                email: arr_user[6],
+                class: arr_user[10]
+              };
+
+              localStorage.setItem('user', JSON.stringify(user));
+              // Retrieving an object
+              const retrievedUser = JSON.parse(localStorage.getItem('user'));
+              console.log(retrievedUser);
+
+              // redirect to
+              if(data.result == 'success') {
+                // alert('Success');
+                window.location.href = "../myInvest-appScript/html/index.html";
+              }
+            })
+            .catch(error => {
+              console.error('Error!', error.message);
+              update_status = true;
+              alert_error();
+            });
+          // Ajax Login
+        })
+        $('.submit-form-spin').hide();
+        // Update Sheet
+      });
+    </script>
   </body>
 </html>
