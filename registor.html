@@ -51,54 +51,118 @@
                 <div class="card" style="border-radius: 15px;">
                   <div class="card-body p-5">
                     <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-
-                    <form>
+                      
+                    <style>
+                      .invalid-js-custom {
+                        position: absolute;
+                        top: 100%;
+                        z-index: 5;
+                        max-width: 100%;
+                        padding: 0.25rem 0.5rem;
+                        margin-top: 0.1rem;
+                        font-size: .875rem;
+                        line-height: 1.5;
+                        color: #fff;
+                        background-color: rgba(220,53,69,.9);
+                        border-radius: 0.25rem;
+                      }
+                    </style>
+                    <form id="register_form" name="register_form" method="post" class="was-validated needs-validation"
+                      action="https://script.google.com/macros/s/AKfycbwqhF79pgOrYQnh6rYJ-49cQ1umb-o8dZGIl_f0xTOg1vRmRwtdoTKgSQpJ_-a_SZG2/exec" novalidate>
+                      
+                      
+                      <input type="hidden" id="type" name="type" value="user_all"/>
+                      <input type="hidden" id="class" name="class" value="user"/>
+                      
                       <div class="form-outline mb-4">
-                        <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Example1cg">Your Name</label>
+                        <input type="text" id="username" name="user_name" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="form3Example1cg">Username</label>
+                        <!-- <div class="invalid-feedback">Please fill out this field.</div> -->
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input type="password" id="password" name="password" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="password">Password</label>
+                        <div id="password_invalid" class="invalid-js-custom" style="position: relative; display: none;">
+                          Password invalid
+                        </div>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input type="password" id="repeat_password" name="repeat_password" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="repeat_password">Repeat-Password</label>
+                      </div>
+                      
+
+                      <div class="form-outline mb-4">
+                        <input type="text" id="first_name" name="first_name" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="first_name">First Name</label>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input type="text" id="last_name" name="last_name" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="last_name">Last Name</label>
                       </div>
 
                       <div class="form-outline mb-4 div-in-flex">
                         <h6 class="mr-3 mt-1 pb-1">Gender: </h6>
       
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                            value="option1" checked />
+                          <input class="form-check-input" type="radio" name="sex" id="femaleGender"
+                            value="female" checked />
                           <label class="form-check-label" for="femaleGender">Female</label>
                         </div>
       
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                            value="option2" />
+                          <input class="form-check-input" type="radio" name="sex" id="maleGender"
+                            value="male" />
                           <label class="form-check-label" for="maleGender">Male</label>
                         </div>
                       </div>
 
                       <div class="form-outline mb-4">
-                        <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Example3cg">Your Email</label>
+                        <input type="text" id="date_of_birth" class="form-control form-control-lg mydatepicker" name="date_of_birth" placeholder="dd/mm/yyyy" 
+                            data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" 
+                            aria-invalid="false" readonly required>
+                        <label class="form-check-label" for="date_of_birth">BirthDate</label>
                       </div>
 
                       <div class="form-outline mb-4">
-                        <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Example4cg">Password</label>
+                        <input type="email" id="email" name="email" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="email">Your Email</label>
                       </div>
 
                       <div class="form-outline mb-4">
-                        <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                        <input type="number" id="phone" name="phone" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="phone">Phone</label>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input type="text" id="country" name="country" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="country">Country</label>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input type="text" id="province" name="province" class="form-control form-control-lg" required/>
+                        <label class="form-label" for="province">Province</label>
                       </div>
 
                       <div class="form-check d-flex justify-content-center mb-5">
-                        <input class="mr-2" type="checkbox" value="" id="form2Example3cg" />
-                        <label class="form-check-label" for="form2Example3g">
+                        <input class="mr-2" id="accept" type="checkbox" name="accept" value="accept" required/>
+                        <label class="form-check-label" for="accept">
                           I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
                         </label>
+                        <div id="accept_checked" class="invalid-js-custom" style="display: none;">
+                          <button class="btn btn-sm alert-danger">Accept</button>
+                          I agree all statements
+                        </div>
                       </div>
 
                       <div class="d-flex justify-content-center">
-                        <button type="button"
-                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                        <button id="registor_submit" type="submit"
+                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+                          Register
+                        </button>
                       </div>
 
                       <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
@@ -118,6 +182,141 @@
         </div>
       </section>
     </div>
+
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="assets/node_modules/jquery/jquery.min.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <script>
+      // Date Picker
+      jQuery(".mydatepicker, #datepicker").datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'dd/mm/yyyy'
+      });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script>
+      function generateMD5(input) {
+          return CryptoJS.MD5(input).toString();
+      }
+
+      function checkPassword(password1, password2) {
+        if(password1 == '' || password1 == undefined){
+          $('#password_invalid').show();
+          return false
+        }else if(password2 == '' || password2 == undefined){
+          $('#password_invalid').show();
+          return false
+        }else if(password1 != password2){
+          $('#password_invalid').show();
+          return false
+        }else{
+          return true
+        }
+          // return CryptoJS.MD5(input).toString();
+      }
+
+      $("#registor_submit").click(function(){
+        // Update Sheet
+        const scriptURL = $('#register_form').attr('action');
+        const form = document.forms['register_form']
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+
+          // valid_form
+          if ($('input[name=accept]:checked').val() == '' || $('input[name=accept]:checked').val() == undefined) {
+            $('#accept_checked').show();
+            return false
+          }else{
+            $('#accept_checked').hide();
+          }
+
+          if ($('input[name=password]').val() == '' || $('input[name=password]').val() == undefined) {
+            text = $('input[name=password]').val();
+            text2 = $('input[name=repeat_password]').val();
+            is_status = checkPassword(text,text2);
+            if (!is_status){
+              return false
+            }
+            md5Hash = generateMD5(text);
+            $('input[name=password]').val(md5Hash);
+          }
+
+          if ($('input[name=repeat_password]').val() == '' || $('input[name=repeat_password]').val() == undefined) {
+            text = $('input[name=password]').val();
+            text2 = $('input[name=repeat_password]').val();
+            is_status = checkPassword(text,text2);
+            if (!is_status){
+              return false
+            }
+          }
+
+          if ($('input[name=user_name]').val() == '' || $('input[name=user_name]').val() == undefined) {
+            return false
+          }
+
+          if ($('input[name=first_name]').val() == '' || $('input[name=first_name]').val() == undefined) {
+            return false
+          }
+
+          if ($('input[name=last_name]').val() == '' || $('input[name=last_name]').val() == undefined) {
+            return false
+          }
+
+          if ($('input[name=sex]').val() == '' || $('input[name=sex]').val() == undefined) {
+            return false
+          }
+
+          if ($('input[name=date_of_birth]').val() == '' || $('input[name=date_of_birth]').val() == undefined) {
+            return false
+          }
+
+          if ($('input[name=email]').val() == '' || $('input[name=email]').val() == undefined) {
+            return false
+          }
+
+          if ($('input[name=phone]').val() == '' || $('input[name=phone]').val() == undefined) {
+            return false
+          }
+
+          if ($('input[name=country]').val() == '' || $('input[name=country]').val() == undefined) {
+            return false
+          }
+
+          if ($('input[name=province]').val() == '' || $('input[name=province]').val() == undefined) {
+            return false
+          }
+          // valid_form
+          $('#register_form').addClass('disabled');
+          // $('.submit-form-spin').show();
+
+          fetch(scriptURL, { 
+            method: 'POST',
+            mode: 'no-cors',
+            body: new URLSearchParams(new FormData(form)),
+          })
+          .then(response => {
+            alert("บันทึกข้อมูลเรียบร้อยแล้ว..")
+            // Swal.fire({
+            //   title: "Successfully!",
+            //   showConfirmButton: false,
+            //   type: "success",  // Correct the parameter name here
+            //   timer: 1500
+            // });
+            // setTimeout(function() {
+            //   location.reload();
+            // }, 1500);
+          })
+          .catch(error => console.error('Error!', error.message))
+        })
+        // $('.submit-form-spin').hide();
+        // Update Sheet
+      });
+    </script>
 
   </body>
 </html>
