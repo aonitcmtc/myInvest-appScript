@@ -205,6 +205,7 @@
       }
 
       function checkPassword(password1, password2) {
+        alert(password1+"//"+password2);
         if(password1 == '' || password1 == undefined){
           $('#password_invalid').show();
           return false
@@ -215,6 +216,7 @@
           $('#password_invalid').show();
           return false
         }else{
+          $('#password_invalid').hide();
           return true
         }
           // return CryptoJS.MD5(input).toString();
@@ -235,24 +237,11 @@
             $('#accept_checked').hide();
           }
 
-          if ($('input[name=password]').val() == '' || $('input[name=password]').val() == undefined) {
-            text = $('input[name=password]').val();
-            text2 = $('input[name=repeat_password]').val();
-            is_status = checkPassword(text,text2);
-            if (!is_status){
-              return false
-            }
-            md5Hash = generateMD5(text);
-            $('input[name=password]').val(md5Hash);
-          }
-
-          if ($('input[name=repeat_password]').val() == '' || $('input[name=repeat_password]').val() == undefined) {
-            text = $('input[name=password]').val();
-            text2 = $('input[name=repeat_password]').val();
-            is_status = checkPassword(text,text2);
-            if (!is_status){
-              return false
-            }
+          text = $('input[name=password]').val();
+          text2 = $('input[name=repeat_password]').val();
+          is_status = checkPassword(text,text2);       
+          if (!is_status){
+            return false
           }
 
           if ($('input[name=user_name]').val() == '' || $('input[name=user_name]').val() == undefined) {
@@ -294,24 +283,32 @@
           $('#register_form').addClass('disabled');
           // $('.submit-form-spin').show();
 
-          fetch(scriptURL, { 
-            method: 'POST',
-            mode: 'no-cors',
-            body: new URLSearchParams(new FormData(form)),
-          })
-          .then(response => {
-            alert("บันทึกข้อมูลเรียบร้อยแล้ว..")
-            // Swal.fire({
-            //   title: "Successfully!",
-            //   showConfirmButton: false,
-            //   type: "success",  // Correct the parameter name here
-            //   timer: 1500
-            // });
-            // setTimeout(function() {
-            //   location.reload();
-            // }, 1500);
-          })
-          .catch(error => console.error('Error!', error.message))
+          if (is_status){
+            $('#password_invalid').hide();
+            md5Hash = generateMD5(text);
+            $('input[name=password]').val(md5Hash);
+
+            fetch(scriptURL, { 
+              method: 'POST',
+              mode: 'no-cors',
+              body: new URLSearchParams(new FormData(form)),
+            })
+            .then(response => {
+              window.location.href = 'index.html';
+              // Swal.fire({
+              //   title: "Successfully!",
+              //   showConfirmButton: false,
+              //   type: "success",  // Correct the parameter name here
+              //   timer: 1500
+              // });
+              // setTimeout(function() {
+              //   location.reload();
+              // }, 1500);
+            })
+            .catch(error => console.error('Error!', error.message))
+          }
+
+          
         })
         // $('.submit-form-spin').hide();
         // Update Sheet
