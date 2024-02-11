@@ -144,13 +144,16 @@
 
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="/assets/node_modules/jquery/jquery.min.js"></script>
+    <script src="assets/node_modules/jquery/jquery.min.js"></script>
     <!-- Sweet-Alert  -->
-    <script src="/assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <script src="/assets/node_modules/sweetalert2/sweet-alert.init.js"></script>
+    <script src="assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="assets/node_modules/sweetalert2/sweet-alert.init.js"></script>
 
+    <script src="assets/plugins/encryp/crypto-js.min.js"></script>
     <script>
-      
+      function generateMD5(input) {
+        return CryptoJS.MD5(input).toString();
+      }
       function alert_error(txt = '') {
         title = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
         if(txt != '') {
@@ -200,7 +203,7 @@
 
           var scriptURL = $('#loginForm').attr('action');
           var username = $('#username').val();
-          var password = $('#password').val();
+          var password = generateMD5($('#password').val());
 
           // var username = 'admin';
           // var password = '1234';
@@ -230,7 +233,7 @@
               // redirect to
               if(data.result == 'success') {
                 // alert('Success');
-                window.location.href = "/html/index.html";
+                window.location.href = "html/index.html";
               }
             })
             .catch(error => {

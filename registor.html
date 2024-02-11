@@ -198,14 +198,14 @@
       });
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script src="assets/plugins/encryp/crypto-js.min.js"></script>
     <script>
       function generateMD5(input) {
           return CryptoJS.MD5(input).toString();
       }
 
       function checkPassword(password1, password2) {
-        alert(password1+"//"+password2);
+        // alert(password1+"//"+password2);
         if(password1 == '' || password1 == undefined){
           $('#password_invalid').show();
           return false
