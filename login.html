@@ -84,7 +84,7 @@
                   </div>
                   <!-- action="html/index.html" -->
                   <form id="loginForm" name="loginForm"
-                      action="https://script.google.com/macros/s/AKfycbyzSBLAsk4BE5YXCnmn3yDadGSyDt878OR7JUVwonoK-qO243ahgC1M8NUCeoY7u9tv/exec">
+                      action="https://script.google.com/macros/s/AKfycbwCFtbbRXrlVzc9_bCErG0v-VNKg6Q6wsFN5WbdRd0-M2BSCeh5AI6ZFvMZF3NWJc_f/exec">
                     
                     <input type="hidden" id="ctrl" name="ctrl" value="checkLogin" class="form-control" />
                     <!-- Username input -->
@@ -150,6 +150,8 @@
     <script src="assets/node_modules/sweetalert2/sweet-alert.init.js"></script>
 
     <script src="assets/plugins/encryp/crypto-js.min.js"></script>
+    <!-- JWT-TOKEN  -->
+    <script src="assets/plugins/encryp/jwt_token.js"></script>
     <script>
       function generateMD5(input) {
         return CryptoJS.MD5(input).toString();
@@ -222,12 +224,16 @@
                 user: arr_user[1],
                 fullname: arr_user[3]+' '+arr_user[4],
                 email: arr_user[6],
-                class: arr_user[10]
+                class: arr_user[11]
               };
 
-              localStorage.setItem('user', JSON.stringify(user));
+              // Encode (Sign) the JWT
+              const encodedJWT = encodeJWT(user, secretKey);
+              console.log("Encoded JWT:", encodedJWT);
+
+              localStorage.setItem('user', JSON.stringify(encodedJWT));
               // Retrieving an object
-              const retrievedUser = JSON.parse(localStorage.getItem('user'));
+              // const retrievedUser = JSON.parse(localStorage.getItem('user'));
               // console.log(retrievedUser);
 
               // redirect to

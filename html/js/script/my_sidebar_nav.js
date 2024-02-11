@@ -26,6 +26,20 @@ var nav_code = css + `<nav class="sidebar-nav">
                         <span class="hide-menu">My Invest</span>
                       </a>
                     </li>
+                    <li class="nav-small-cap is-class-admin">--- ADMIN</li>
+                    <li class="is-class-admin">
+                      <a
+                        class="has-arrow waves-effect waves-dark"
+                        href="#"
+                        aria-expanded="false"
+                        ><i class="icon-Box-Full"></i
+                        ><span class="hide-menu">Users</span>
+                      </a>
+                      <ul aria-expanded="false" class="collapse">
+                        <li><a href="ad_users.html">users</a></li>
+                        <li><a href="#">user login</a></li>
+                      </ul>
+                    </li>
                     <li class="nav-small-cap">--- PERSONAL</li>
                     <li>
                       <a
@@ -161,12 +175,29 @@ myNav.append(nav_code);
 //Check User Login
 $(document).ready(function() {
   const retrievedUser = JSON.parse(localStorage.getItem('user'));
-  console.log('retrievedUser');
+  // console.log('retrievedUser');
   if (retrievedUser) {
-      console.log(retrievedUser.class);
-      console.log(retrievedUser.user);
+      // console.log(retrievedUser.class);
+      // console.log(retrievedUser.user);
   }else{
       localStorage.clear();
       window.location.href = "../index.html";
   }
 });
+
+const encodedJWT = JSON.parse(localStorage.getItem('user'));
+// Encode (Sign) the JWT
+// console.log("secretKey JWT:", secretKey);
+// console.log("Encoded JWT:", encodedJWT);
+
+// Decode (Verify) the JWT
+const decodedPayload = decodeJWT(encodedJWT, secretKey);
+console.log("Decoded JWT:", decodedPayload);
+// Check CLASS
+console.log("Check JWT:", decodedPayload['class']);
+if (decodedPayload['class'] == 'admin') {
+  console.log('Hello! ADMINER');
+}else{
+  // use remove hide code
+  $('.is-class-admin').remove();
+}
