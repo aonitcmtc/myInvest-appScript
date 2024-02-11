@@ -185,23 +185,21 @@ $(document).ready(function() {
   }
 });
 
-const encodedJWT = JSON.parse(localStorage.getItem('user'));
-// Encode (Sign) the JWT
-// console.log("secretKey JWT:", secretKey);
-// console.log("Encoded JWT:", encodedJWT);
+setTimeout(function() {
+  const encodedJWT = JSON.parse(localStorage.getItem('user'));
+  const decodedPayload = decodeJWT(encodedJWT, secretKey);
+  console.log("Decoded JWT:", decodedPayload);
+  // Check CLASS
+  console.log("Check JWT:", decodedPayload['class']);
+  if (decodedPayload['class'] == 'admin') {
+    console.log('Hello! ADMINER');
+  }else{
+    // use remove hide code
+    // $('.is-class-admin').remove();
+    var elements = document.querySelectorAll('.is-class-admin');
+    elements.forEach(function(element) {
+      element.parentNode.removeChild(element);
+    });
+  }
+}, 200);
 
-// Decode (Verify) the JWT
-const decodedPayload = decodeJWT(encodedJWT, secretKey);
-console.log("Decoded JWT:", decodedPayload);
-// Check CLASS
-console.log("Check JWT:", decodedPayload['class']);
-if (decodedPayload['class'] == 'admin') {
-  console.log('Hello! ADMINER');
-}else{
-  // use remove hide code
-  // $('.is-class-admin').remove();
-  var elements = document.querySelectorAll('.is-class-admin');
-  elements.forEach(function(element) {
-    element.parentNode.removeChild(element);
-  });
-}
