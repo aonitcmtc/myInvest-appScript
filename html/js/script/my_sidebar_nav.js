@@ -8,13 +8,9 @@ console.log("Check JWT:", decodedPayload['class']);
 if (decodedPayload['class'] == 'admin') {
   console.log('Hello! ADMINER');
 }else{
+  console.log('Hello! User: ' + decodedPayload['user']);
   // use remove hide code
   $('.is-class-admin').remove();
-  console.log('Hello! User: ' + decodedPayload['user']);
-  // var elements = document.querySelectorAll('.is-class-admin');
-  // elements.forEach(function(element) {
-  //   element.parentNode.removeChild(element);
-  // });
 }
 
 // mynavbar
@@ -28,7 +24,7 @@ var css = `<style>
               }
             } 
           </style>`;
-var nav_ad = ``;
+
 var nav_code = css + `<nav class="sidebar-nav">
                   <ul id="sidebarnav">
                     <li class="nav-small-cap">--- DEVELOP</li>

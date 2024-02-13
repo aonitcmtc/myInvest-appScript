@@ -68,7 +68,7 @@
                       }
                     </style>
                     <form id="register_form" name="register_form" method="post" class="was-validated needs-validation"
-                      action="https://script.google.com/macros/s/AKfycbwqhF79pgOrYQnh6rYJ-49cQ1umb-o8dZGIl_f0xTOg1vRmRwtdoTKgSQpJ_-a_SZG2/exec" novalidate>
+                      action="https://script.google.com/macros/s/AKfycbyzBNp5_UrZi8iB8k8KgCM0mI02rLUg6XZv17f3PGr8RQ-9Muz5gg51NA3QOrD-omxi/exec" novalidate>
                       
                       
                       <input type="hidden" id="type" name="type" value="user_all"/>
@@ -199,6 +199,10 @@
     </script>
 
     <script src="assets/plugins/encryp/crypto-js.min.js"></script>
+    <!-- Sweet-Alert  -->
+    <script src="assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="assets/node_modules/sweetalert2/sweet-alert.init.js"></script>
+
     <script>
       function generateMD5(input) {
           return CryptoJS.MD5(input).toString();
@@ -282,6 +286,34 @@
           // valid_form
           $('#register_form').addClass('disabled');
           // $('.submit-form-spin').show();
+
+          let timerInterval;
+          Swal.fire({
+              title: 'Hello! ' + $('#username').val(),
+              html: '<h6 class="text-danger">Welcom to MyInvest</h6> <br>wait <strong class="text-danger"></strong> seconds.<br> <strong class="text-primary">Building dataSheets</strong>',
+              timer: 9899,
+              keyboard: false,
+              onBeforeOpen: () => {
+                  Swal.showLoading()
+                  timerInterval = setInterval(() => {
+                      Swal.getContent().querySelector('strong')
+                          .textContent = Swal.getTimerLeft()
+                  }, 100)
+              },
+              onClose: () => {
+                  clearInterval(timerInterval)
+              }
+          }).then((result) => {
+              if (
+                  // Read more about handling dismissals
+                  result.dismiss === Swal.DismissReason.timer
+              ) {
+                  console.log('I was closed by the timer')
+                  window.location.href = 'index.html';
+              }
+          })
+
+          return false
 
           if (is_status){
             $('#password_invalid').hide();
