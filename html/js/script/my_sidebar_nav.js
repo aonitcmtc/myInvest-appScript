@@ -1,4 +1,21 @@
 var local_name = '362049dad35d9cef427de57d206b8071'; //MyInvest
+
+const encodedJWT = JSON.parse(localStorage.getItem('user'));
+const decodedPayload = decodeJWT(encodedJWT, secretKey);
+console.log("Decoded JWT:", decodedPayload);
+// Check CLASS
+console.log("Check JWT:", decodedPayload['class']);
+if (decodedPayload['class'] == 'admin') {
+  console.log('Hello! ADMINER');
+}else{
+  // use remove hide code
+  // $('.is-class-admin').remove();
+  var elements = document.querySelectorAll('.is-class-admin');
+  elements.forEach(function(element) {
+    element.parentNode.removeChild(element);
+  });
+}
+
 // mynavbar
 var myNav = $("#my_sidebar_nav");
 var css = `<style>
@@ -10,6 +27,7 @@ var css = `<style>
               }
             } 
           </style>`;
+var nav_ad = ``;
 var nav_code = css + `<nav class="sidebar-nav">
                   <ul id="sidebarnav">
                     <li class="nav-small-cap">--- DEVELOP</li>
@@ -183,24 +201,6 @@ $(document).ready(function() {
       localStorage.clear();
       window.location.href = "../index.html";
   }
-
-  setTimeout(function() {
-    const encodedJWT = JSON.parse(localStorage.getItem('user'));
-    const decodedPayload = decodeJWT(encodedJWT, secretKey);
-    console.log("Decoded JWT:", decodedPayload);
-    // Check CLASS
-    console.log("Check JWT:", decodedPayload['class']);
-    if (decodedPayload['class'] == 'admin') {
-      console.log('Hello! ADMINER');
-    }else{
-      // use remove hide code
-      // $('.is-class-admin').remove();
-      var elements = document.querySelectorAll('.is-class-admin');
-      elements.forEach(function(element) {
-        element.parentNode.removeChild(element);
-      });
-    }
-  }, 200);
 });
 
 
