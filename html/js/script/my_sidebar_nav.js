@@ -9,11 +9,11 @@ if (decodedPayload['class'] == 'admin') {
   console.log('Hello! ADMINER');
 }else{
   // use remove hide code
-  // $('.is-class-admin').remove();
-  var elements = document.querySelectorAll('.is-class-admin');
-  elements.forEach(function(element) {
-    element.parentNode.removeChild(element);
-  });
+  $('.is-class-admin').remove();
+  // var elements = document.querySelectorAll('.is-class-admin');
+  // elements.forEach(function(element) {
+  //   element.parentNode.removeChild(element);
+  // });
 }
 
 // mynavbar
