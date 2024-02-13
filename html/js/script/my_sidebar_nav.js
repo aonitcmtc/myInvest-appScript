@@ -10,6 +10,7 @@ if (decodedPayload['class'] == 'admin') {
 }else{
   // use remove hide code
   $('.is-class-admin').remove();
+  console.log('Hello! User: ' + decodedPayload['user']);
   // var elements = document.querySelectorAll('.is-class-admin');
   // elements.forEach(function(element) {
   //   element.parentNode.removeChild(element);
