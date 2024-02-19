@@ -5,6 +5,8 @@
 $(document).ready(function () {
 
   // console.log("My Invest JWT:", decodedPayload['email']);
+  const encodedJWT = JSON.parse(localStorage.getItem('user'));
+  const decodedPayload = decodeJWT(encodedJWT, secretKey);
   $('#mysheet').val(decodedPayload['email']);
 
   $("#add_invest").click(function(){
