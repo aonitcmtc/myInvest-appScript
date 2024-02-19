@@ -15,8 +15,8 @@
     <title>Admin Wrap Template by WrapPixel</title>
     <!-- Load Header -->
     <script src="js/script/my_load_header.js"></script>
-    
-    <!-- Load Header -->
+    <!-- Load axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <link rel="canonical" href="https://www.wrappixel.com/templates/adminwrap/"/>
     <!-- Favicon icon -->
@@ -735,12 +735,12 @@
           <!-- ============================================================== -->
           <div class="row page-titles">
             <div class="col-md-5 align-self-center">
-              <h3 class="text-themecolor">My Invest</h3>
+              <h3 class="text-themecolor">My AI</h3>
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                   <a href="javascript:void(0)">Home</a>
                 </li>
-                <li class="breadcrumb-item active">My Invest</li>
+                <li class="breadcrumb-item active">My AI</li>
               </ol>
             </div>
             <div
@@ -775,12 +775,11 @@
               <!-- table responsive -->
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title text-capitalize"><span id="card_title_sheet">Stock</span> History</h4>
-                  <h6 class="card-subtitle">Sheet <code>.select</code></h6>
+                  <h4 class="card-title text-capitalize"><span id="card_title_sheet">MY </span> AI</h4>
+                  <h6 class="card-subtitle">MY AI <code>.AI</code></h6>
 
                   <div class="row">
-                    <div id="mynavbar" class="col-8 mt-2"></div>
-                    <div class="col-4 mt-2 text-right ">
+                    <div class="col-12 mt-2 text-right ">
                       <a href="#" id="add_invest" class="btn btn-primary pull-right text-white"> 
                         <strong><i class="icon-Add"></i></strong>
                         เพิ่ม
@@ -1115,11 +1114,10 @@
               }
             </style>
             <form id="myForm" name="myForm" class="needs-validation" 
-                  action="https://script.google.com/macros/s/AKfycbzYMOqiRWuh2SfYJTgZSnjHTbwQg9PWqmNHNAKc0JJy0ad3p3cu1kkbWIKm3rtbHdD1/exec" 
+                  action="https://script.google.com/macros/s/AKfycbzne_FUWX5gFpShyzxyHm_gD2CwgWNzB2qci9uMiP-VHYpFzkysV9LQoQDv0I6gJwgifQ/exec" 
                   method="post" novalidate>
                 <!-- Include input fields for Date, Symbol, Buy, Sell, Unit, Price/Unit, Broker, Remark -->
                 <input type="hidden" id="is_type" name="type" value="stock">
-                <input type="hidden" id="mysheet" name="mysheet" value="@mail">
                 
                 <div class="btn-group col-12" role="group" aria-label="Basic example">
                   <button type="button" id="buy_order" class="btn btn-outline-success">BUY</button>

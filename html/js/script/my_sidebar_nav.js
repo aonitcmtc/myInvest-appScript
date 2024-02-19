@@ -41,6 +41,12 @@ var nav_code = css + `<nav class="sidebar-nav">
                         <span class="hide-menu">My Invest</span>
                       </a>
                     </li>
+                    <li>
+                      <a class="waves-effect waves-dark" href="my_ai.html" aria-expanded="false">
+                        <i class="icon-Cloud-Picture"></i>
+                        <span class="hide-menu">My AI</span>
+                      </a>
+                    </li>
                     <li class="nav-small-cap is-class-admin">--- ADMIN</li>
                     <li class="is-class-admin">
                       <a

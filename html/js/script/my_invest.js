@@ -4,6 +4,9 @@
 
 $(document).ready(function () {
 
+  // console.log("My Invest JWT:", decodedPayload['email']);
+  $('#mysheet').val(decodedPayload['email']);
+
   $("#add_invest").click(function(){
     var is_type = $('.stock-btn.active').data('type');
     // Update other modal content and properties
@@ -26,6 +29,12 @@ $(document).ready(function () {
   $('.stock-btn').on('click', function() {
     name_label = $(this).data('type');
     $('#card_title_sheet').text(name_label);
+    tableBody = $("table tbody tr").hide();
+    if (name_label == 'all') {
+      getSheetDataByDate();
+    }else{
+      getSheetByGroup(name_label);
+    }
   });
 
   
@@ -155,8 +164,10 @@ $(document).ready(function () {
   }
 
   function getSheetDataByDate() {
+    $('#all_invest_loading').show();
+
     var scriptURL = $('#myForm').attr('action');
-    var url_searchName = scriptURL+"?ctrl=" + encodeURIComponent('getSheetDataByDate');
+    var url_searchName = scriptURL+"?ctrl=" + encodeURIComponent('getSheetDataByDate') + "&mysheet=" + encodeURIComponent(decodedPayload['email']);
     
     // update checkuser9
     fetch(url_searchName)
@@ -175,6 +186,33 @@ $(document).ready(function () {
       })
       .catch(error => {
         console.error('Error!', error.message);
+      });
+  }
+
+  function getSheetByGroup(label) {
+    $('#all_invest_loading').show();
+
+    var scriptURL = $('#myForm').attr('action');
+    var url_searchName = scriptURL+"?ctrl=" + encodeURIComponent('getSheetByGroup');
+        url_searchName = url_searchName + "&mysheet=" + encodeURIComponent(decodedPayload['email']) + "&type=" + encodeURIComponent(label);
+    // update checkuser9
+    fetch(url_searchName)
+      .then(response => response.json())
+      .then(data => {
+        // console.log(data);
+        var sheetAllData = JSON.parse(data.sheetAllData)
+        // console.log(sheetAllData !== null && Object.keys(sheetAllData).length !== 0);
+        if (sheetAllData !== null && Object.keys(sheetAllData).length !== 0) {
+          create_data_table(sheetAllData);
+        } else {
+          $('#all_invest_loading').hide();
+          $('#all_invest_no_content').show();
+          console.log("Object is either null or empty");
+        }
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        $('#all_invest_loading').hide();
       });
   }
 
@@ -247,6 +285,7 @@ $(document).ready(function () {
 
   // GetSheet
   // getAll();
-  getSheetDataByDate();
+  // getSheetDataByDate();
+  getSheetByGroup('stock');
   
 });

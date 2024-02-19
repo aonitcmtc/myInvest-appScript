@@ -24,6 +24,8 @@ var nav_code = `<nav class="navbar navbar-expand-lg navbar-light">
                           <a class="dropdown-item stock-btn" id="dd_gold" data-type="gold" href="#">ทอง</a>
                           <a class="dropdown-item stock-btn" id="dd_forex" data-type="forex" href="#">Forex</a>
                           <a class="dropdown-item stock-btn" id="dd_crypto" data-type="crypto" href="#">Crypto Currency</a>
+                          <hr class="dropdown-divider">
+                          <a class="dropdown-item stock-btn" id="dd_all" data-type="all" href="#">All</a>
                         </div>
                       </div>
                     </div>
@@ -37,6 +39,7 @@ var nav_code = `<nav class="navbar navbar-expand-lg navbar-light">
                       <button type="button" data-type="gold" id="gold" class="btn btn-secondary stock-btn">ทอง</button>
                       <button type="button" data-type="forex" id="forex" class="btn btn-secondary stock-btn">Forex</button>
                       <button type="button" data-type="crypto" id="crypto" class="btn btn-secondary stock-btn">Crypto Currency</button>
+                      <button type="button" data-type="all" id="all" class="btn btn-secondary stock-btn">All</button>
                     </div>
                   </div>
                 </nav>`
