@@ -36,6 +36,12 @@ var nav_code = css + `<nav class="sidebar-nav">
                       </a>
                     </li>
                     <li>
+                      <a class="waves-effect waves-dark" href="pages-profile.html" aria-expanded="false">
+                        <i class="icon-Professor"></i>
+                        <span class="hide-menu">My Profile</span>
+                      </a>
+                    </li>
+                    <li>
                       <a class="waves-effect waves-dark" href="my_invest.html" aria-expanded="false">
                         <i class="icon-Money-Bag"></i>
                         <span class="hide-menu">My Invest</span>
