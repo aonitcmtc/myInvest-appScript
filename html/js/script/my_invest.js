@@ -158,6 +158,18 @@ $(document).ready(function () {
     // Update Sheet
   });
 
+  
+  $("#hide_price").click(function(){
+    var x = document.getElementById("sum_price");
+    if ($('#sum_price').text() == '#') {
+      // x.style.display = "block";
+      $('#sum_price').text(sum_price_gb);
+    } else {
+      // x.style.display = "none";
+      $('#sum_price').text('#');
+    }
+  });
+
   function getAll() {
     var scriptURL = $('#myForm').attr('action');
     var url_searchName = scriptURL+"?ctrl=" + encodeURIComponent('getAll');
@@ -167,6 +179,7 @@ $(document).ready(function () {
 
   function getSheetDataByDate() {
     $('#all_invest_loading').show();
+    $('#sum_price').text('#');
 
     var scriptURL = $('#myForm').attr('action');
     var url_searchName = scriptURL+"?ctrl=" + encodeURIComponent('getSheetDataByDate') + "&mysheet=" + encodeURIComponent(decodedPayload['email']);
@@ -193,6 +206,7 @@ $(document).ready(function () {
 
   function getSheetByGroup(label) {
     $('#all_invest_loading').show();
+    $('#sum_price').text('#');
 
     var scriptURL = $('#myForm').attr('action');
     var url_searchName = scriptURL+"?ctrl=" + encodeURIComponent('getSheetByGroup');
@@ -218,6 +232,7 @@ $(document).ready(function () {
       });
   }
 
+  var sum_price_gb = 0;
   function create_data_table(data) {
     console.log('Show Data >>>');
     all_data = []
@@ -225,6 +240,7 @@ $(document).ready(function () {
     tableBody = $("table tbody");
     tbody = '';
     row_number = 0;
+    sum_price = 0;
     for (const date in data) {
       // console.log(`Processing data for ${date}`);
       all_data = data[date];
@@ -243,6 +259,8 @@ $(document).ready(function () {
         if (all_data[i][4] > 0){
           tr_color = 'table-danger';
         }
+        sum_price = sum_price + parseFloat(all_data[i][5])
+        console.log(sum_price)
 
         row_number++;
         tbody = tbody+`<tr class="text-center text-secondary fw-bold ${tr_color}">`;
@@ -264,8 +282,19 @@ $(document).ready(function () {
     $('#all_invest_loading').hide();
     $('#select_invest_loading').hide();
     // console.log('Show Table >>>');
+    sum_price = parseFloat(sum_price.toFixed(2))
+
+    let formattedNumber = sum_price.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+    // console.log(formattedNumber);
+    sum_price_gb = formattedNumber
+
+    $('#sum_price').text(sum_price_gb);
+    // console.log(sum_price_gb)
+
     tableBody.append(tbody); // render Table
-    // console.log(tbody)
 
     // setTimeout(function() {
       // $("#all_invest").DataTable({
