@@ -42,6 +42,12 @@ var nav_code = css + `<nav class="sidebar-nav">
                       </a>
                     </li>
                     <li>
+                      <a class="waves-effect waves-dark" href="my_price.html" aria-expanded="false">
+                        <i class="icon-Pricing"></i>
+                        <span class="hide-menu">My Price</span>
+                      </a>
+                    </li>
+                    <li>
                       <a class="waves-effect waves-dark" href="my_invest.html" aria-expanded="false">
                         <i class="icon-Money-Bag"></i>
                         <span class="hide-menu">My Invest</span>

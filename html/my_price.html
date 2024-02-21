@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="keywords"
+      content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 4 admin, bootstrap 4, css3 dashboard, bootstrap 4 dashboard, admin wrap admin bootstrap 4 dashboard, frontend, responsive bootstrap 4 admin template, material design, material dashboard bootstrap 4 dashboard template"/>
+    <meta
+      name="description"
+      content="Admin Wrap is powerful and clean admin dashboard template, inpired from Google's Material Design"/>
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Admin Wrap Template by WrapPixel</title>
+
+    <script src="../assets/plugins/encryp/crypto-js.min.js"></script>
+    <script src="../assets/plugins/encryp/jwt_token.js"></script>
+    <!-- Load Header -->
+    <script src="js/script/my_load_header.js"></script>
+
+    <link rel="canonical" href="https://www.wrappixel.com/templates/adminwrap/"/>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png"/>
+    <!-- Bootstrap Core CSS -->
+    <link href="../assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../assets/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css"/>
+    <link rel="stylesheet" type="text/css" href="../assets/node_modules/datatables.net-bs4/css/responsive.dataTables.min.css"/>
+    
+    <!-- Custom CSS -->
+    <link href="css/pages/table-pages.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- You can change the theme colors from here -->
+    <link href="css/colors/default.css" id="theme" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- <script src="js/script/my_type.js"></script> Test -->
+  </head>
+
+  <body class="fix-header card-no-border fix-sidebar">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+      <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Admin Wrap</p>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+      <!-- ============================================================== -->
+      <!-- Topbar header - style you can find in pages.scss -->
+      <!-- ============================================================== -->
+      <header class="topbar">
+        <div id="my_top_bar"></div>
+      </header>
+      <!-- ============================================================== -->
+      <!-- End Topbar header -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div id="my_sidebar_nav" class="scroll-sidebar">
+          <!-- Sidebar navigation-->
+        </div>
+        <!-- End Sidebar scroll-->
+      </aside>
+      <!-- ============================================================== -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+          <!-- ============================================================== -->
+          <!-- Bread crumb and right sidebar toggle -->
+          <!-- ============================================================== -->
+          <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+              <h3 class="text-themecolor">My Price</h3>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="javascript:void(0)">Home</a>
+                </li>
+                <li class="breadcrumb-item active">My Price</li>
+              </ol>
+            </div>
+            <div
+              class="col-md-7 align-self-center text-right d-none d-md-block"
+            >
+              <button type="button" class="btn btn-info">
+                <i class="fa fa-plus-circle"></i> Create New
+              </button>
+            </div>
+            <div class="">
+              <button
+                class="
+                  right-side-toggle
+                  waves-effect waves-light
+                  btn-inverse btn btn-circle btn-sm
+                  pull-right
+                  m-l-10
+                "
+              >
+                <i class="ti-settings text-white"></i>
+              </button>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- End Bread crumb and right sidebar toggle -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- Start Page Content -->
+          <!-- ============================================================== -->
+          <div class="row">
+            <div class="col-12">
+              <!-- table responsive -->
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title text-capitalize"><span id="card_title_sheet">Stock</span> History</h4>
+                  <h6 class="card-subtitle">Sheet <code>.select</code></h6>
+
+                  <div class="row">
+                    <div id="mynavbar" class="col-8 mt-2"></div>
+                    <div class="col-4 mt-2 text-right ">
+                      <a href="#" id="add_price" class="btn btn-primary pull-right text-white"> 
+                        <strong><i class="icon-Add"></i></strong>
+                        เพิ่ม
+                      </a>
+                    </div>
+                  </div>
+
+                  <!-- dev -->
+                  <input type="file" id="fileInput" accept="">
+                  <pre id="fileContents"></pre>
+
+                  <script>
+                    document.getElementById('fileInput').addEventListener('change', function(event) {
+                      var file = event.target.files[0];
+                      var reader = new FileReader();
+
+                      reader.onload = function(event) {
+                        var contents = event.target.result;
+                        document.getElementById('fileContents').textContent = contents;
+                        console.log('contents >>> ')
+                        // console.log(contents)
+                        jsonString = JSON.parse(contents)
+                        url = "https://script.google.com/macros/s/AKfycbwkebhTkyqoXCfvaCqcSLsBx72CKh2TgupzOnHeE0Rt30rSkKnT_lhLhSZoLwpVUi2E0w/exec";
+                        // Loop through the array
+                        for (var i = 0; i < jsonString.length; i++) {
+                          (function(index) {
+                            // Get the stock data at the current index
+                            var stock = jsonString[index];
+                            console.log("STOCK[]:", stock);
+
+                            // Access properties of each object
+                            console.log("Symbol:", stock.symbol);
+                            console.log("Full Name:", stock.full_name);
+                            console.log("Description:", stock.description);
+                            console.log("Ticker:", stock.ticker);
+                            console.log("Type:", stock.type);
+                            console.log("Exchange:", stock.exchange);
+
+                            // Delay the execution of each fetch request by 250 milliseconds
+                            setTimeout(function() {
+                              fetch(url, {
+                                method: 'POST',
+                                mode: 'no-cors',
+                                headers: {
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(stock),
+                              })
+                              .then(response => response.text())
+                              .then(data => {
+                                console.log('Success:', data);
+                              })
+                              .catch((error) => {
+                                console.error('Error:', error);
+                              });
+                            }, 5000 * index); // Delay increases with each iteration
+                          })(i);
+                        }
+
+                      };
+
+                      reader.readAsText(file);
+                    });
+                  </script>
+                  <!-- dev -->
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- End PAge Content -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- Right sidebar -->
+          <!-- ============================================================== -->
+          <!-- .right-sidebar -->
+          <div class="right-sidebar">
+            <div class="slimscrollright">
+              <div class="rpanel-title">
+                Service Panel
+                <span><i class="ti-close right-side-toggle"></i></span>
+              </div>
+              <div class="r-panel-body">
+                <ul id="themecolors" class="m-t-20">
+                  <li><b>With Light sidebar</b></li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="default"
+                      class="default-theme"
+                      >1</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="green"
+                      class="green-theme"
+                      >2</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="red"
+                      class="red-theme"
+                      >3</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="blue"
+                      class="blue-theme"
+                      >4</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="purple"
+                      class="purple-theme"
+                      >5</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="megna"
+                      class="megna-theme"
+                      >6</a
+                    >
+                  </li>
+                  <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="default-dark"
+                      class="default-dark-theme working"
+                      >7</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="green-dark"
+                      class="green-dark-theme"
+                      >8</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="red-dark"
+                      class="red-dark-theme"
+                      >9</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="blue-dark"
+                      class="blue-dark-theme"
+                      >10</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="purple-dark"
+                      class="purple-dark-theme"
+                      >11</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      data-theme="megna-dark"
+                      class="megna-dark-theme"
+                      >12</a
+                    >
+                  </li>
+                </ul>
+                <ul class="m-t-20 chatonline">
+                  <li><b>Chat option</b></li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img
+                        src="../assets/images/users/1.jpg"
+                        alt="user-img"
+                        class="img-circle"
+                      />
+                      <span
+                        >Varun Dhavan
+                        <small class="text-success">online</small></span
+                      ></a
+                    >
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img
+                        src="../assets/images/users/2.jpg"
+                        alt="user-img"
+                        class="img-circle"
+                      />
+                      <span
+                        >Genelia Deshmukh
+                        <small class="text-warning">Away</small></span
+                      ></a
+                    >
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img
+                        src="../assets/images/users/3.jpg"
+                        alt="user-img"
+                        class="img-circle"
+                      />
+                      <span
+                        >Ritesh Deshmukh
+                        <small class="text-danger">Busy</small></span
+                      ></a
+                    >
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img
+                        src="../assets/images/users/4.jpg"
+                        alt="user-img"
+                        class="img-circle"
+                      />
+                      <span
+                        >Arijit Sinh
+                        <small class="text-muted">Offline</small></span
+                      ></a
+                    >
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img
+                        src="../assets/images/users/5.jpg"
+                        alt="user-img"
+                        class="img-circle"
+                      />
+                      <span
+                        >Govinda Star
+                        <small class="text-success">online</small></span
+                      ></a
+                    >
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img
+                        src="../assets/images/users/6.jpg"
+                        alt="user-img"
+                        class="img-circle"
+                      />
+                      <span
+                        >John Abraham<small class="text-success"
+                          >online</small
+                        ></span
+                      ></a
+                    >
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img
+                        src="../assets/images/users/7.jpg"
+                        alt="user-img"
+                        class="img-circle"
+                      />
+                      <span
+                        >Hritik Roshan<small class="text-success"
+                          >online</small
+                        ></span
+                      ></a
+                    >
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img
+                        src="../assets/images/users/8.jpg"
+                        alt="user-img"
+                        class="img-circle"
+                      />
+                      <span
+                        >Pwandeep rajan
+                        <small class="text-success">online</small></span
+                      ></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- End Right sidebar -->
+          <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer">
+          © 2021 Admin Wrap Admin by themedesigner.in
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Page wrapper  -->
+      <!-- ============================================================== -->
+
+      <!-- The Modal -->
+
+      <!-- sample modal content -->
+      <div id="myModal"
+      class="modal long-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="longmodal"
+      aria-hidden="true"
+      style="display: none"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-capitalize"><strong>เพิ่ม</strong> <span id="title_modal">Stock</span></h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              ×
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- <h4>Form</h4> -->
+
+            <style>
+              .invalid-js-custom {
+                position: absolute;
+                top: 100%;
+                z-index: 5;
+                max-width: 100%;
+                padding: 0.25rem 0.5rem;
+                margin-top: 0.1rem;
+                font-size: .875rem;
+                line-height: 1.5;
+                color: #fff;
+                background-color: rgba(220,53,69,.9);
+                border-radius: 0.25rem;
+              }
+            </style>
+            <form id="myForm" name="myForm" class="needs-validation" 
+                  action="https://script.google.com/macros/s/AKfycbzYMOqiRWuh2SfYJTgZSnjHTbwQg9PWqmNHNAKc0JJy0ad3p3cu1kkbWIKm3rtbHdD1/exec" 
+                  method="post" novalidate>
+                <!-- Include input fields for Date, Symbol, Buy, Sell, Unit, Price/Unit, Broker, Remark -->
+                <input type="hidden" id="is_type" name="type" value="stock">
+                <input type="hidden" id="mysheet" name="mysheet" value="@mail">
+                
+                <div class="btn-group col-12" role="group" aria-label="Basic example">
+                  <button type="button" id="buy_order" class="btn btn-outline-success">BUY</button>
+                  <button type="button" id="sell_order" class="btn btn-outline-danger">SELL</button>
+                </div>
+
+                <div class="mt-3">
+                  <label for="date" class="form-label">วันที่บันทึก</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control mydatepicker" name="date" placeholder="mm/dd/yyyy" 
+                        data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" 
+                        aria-invalid="false" readonly required>
+                        <div class="invalid-js-custom" style="display: none;">
+                          Please Date a valid DateTime.
+                        </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text"><i class="ti-calendar"></i></span>
+                    </div>
+                  </div>
+                  <div id="dateHelp" class="form-text text-danger">*เลือกวันที่ดำเนินการก่อนกรอกข้อมูล.</div>
+                </div>
+
+                <div class="mb-3 mt-3">
+                  <label for="symbol" class="form-label">ชื่อ stock</label>
+                  <input type="text" class="form-control" name="symbol" id="symbol" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="price" class="form-label">ราคา/หุ้น</label>
+                  <input type="number" class="form-control" name="price" id="price" required>
+                </div>
+
+                <div id="buy_form" class="mb-3">
+                  <label for="unit_buy" class="form-label">ซื้อ (จำนวน)</label>
+                  <input type="number" class="form-control" name="unit_buy" id="unit_buy" required>
+                  <input type="hidden" class="form-control" name="buy" id="buy">
+                </div>
+
+                <div id="sell_form" class="mb-3" style="display: none;">
+                  <label for="unit_sell" class="form-label">ขาย (จำนวน)</label>
+                  <input type="number" class="form-control" name="unit_sell" id="unit_sell" required>
+                  <input type="hidden" class="form-control" name="sell" id="sell">
+                </div>
+
+                <div class="mb-3">
+                  <label for="unit" class="form-label">ราคารวม</label>
+                  <input type="number" class="form-control" name="unit" id="unit" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="broker" class="form-label">Broker</label>
+                  <input type="text" class="form-control" name="broker" id="broker" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="remark" class="form-label">หมายเหตุ</label>
+                  <input type="text" class="form-control" name="remark" id="remark">
+                </div>
+
+                <!-- Add other input fields as needed -->
+                <div class="text-right">
+                  <button id="update_data" type="submit" class="btn btn-primary">
+                    <i class="fa fa-spinner fa-spin submit-form-spin" style="display: none;"></i>
+                    Submit
+                  </button>
+                </div>
+              </form>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+
+    <!-- The Modal -->
+
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../assets/node_modules/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../assets/node_modules/bootstrap/js/popper.min.js"></script>
+    <script src="../assets/node_modules/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../assets/node_modules/ps/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="../assets/node_modules/styleswitcher/jQuery.style.switcher.js"></script>
+    <!-- Load my_top_bar -->
+    <script src="js/script/my_top_bar.js"></script>
+    <!-- My-NAV-SIDE -->
+    <script src="js/script/my_sidebar_nav.js"></script>
+    <!-- My-Stock-Manu -->
+    <script src="js/script/my_type.js"></script>
+    <!-- My-APP -->
+    <script src="js/script/my_price.js"></script>
+
+    <!-- Sweet-Alert  -->
+    <script src="../assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="../assets/node_modules/sweetalert2/sweet-alert.init.js"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script>
+      // Date Picker
+      jQuery(".mydatepicker, #datepicker").datepicker({
+        autoclose: true,
+        todayHighlight: true,
+      });
+    </script>
+
+    <!-- //For validation with custom styles -->
+    <script>
+      (function () {
+        "use strict";
+        window.addEventListener(
+          "load",
+          function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName("needs-validation");
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(
+              forms,
+              function (form) {
+                form.addEventListener(
+                  "submit",
+                  function (event) {
+                    if (form.checkValidity() === false) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+                    form.classList.add("was-validated");
+                  },
+                  false
+                );
+              }
+            );
+          },
+          false
+        );
+      })();
+    </script>
+    <!-- //For validation with custom styles -->
+    
+  </body>
+</html>
